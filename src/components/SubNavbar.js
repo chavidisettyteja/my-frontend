@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-scroll";
 
 function SubNavbar() {
   return (
@@ -9,8 +10,7 @@ function SubNavbar() {
         borderBottomLeftRadius: "20px",
         borderBottomRightRadius: "20px",
         boxShadow: "0 6px 10px -4px rgba(0, 0, 0, 0.2)",
-       
-        zIndex: 999
+        zIndex: 999,
       }}
     >
       <nav className="navbar navbar-expand-lg">
@@ -27,9 +27,11 @@ function SubNavbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-            <ul className="navbar-nav" style={{ gap: '2rem' }}>
-
+          <div
+            className="collapse navbar-collapse justify-content-center"
+            id="navbarNavDropdown"
+          >
+            <ul className="navbar-nav" style={{ gap: "2rem" }}>
               {/* Prices */}
               <li className="nav-item dropdown">
                 <a
@@ -42,8 +44,16 @@ function SubNavbar() {
                   Prices
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">0 - 50L</a></li>
-                  <li><a className="dropdown-item" href="#">50L - 1CR</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      0 - 50L
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      50L - 1CR
+                    </a>
+                  </li>
                 </ul>
               </li>
 
@@ -59,9 +69,21 @@ function SubNavbar() {
                   BHKs
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">1 BHK</a></li>
-                  <li><a className="dropdown-item" href="#">2 BHK</a></li>
-                  <li><a className="dropdown-item" href="#">3 BHK</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      1 BHK
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      2 BHK
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      3 BHK
+                    </a>
+                  </li>
                 </ul>
               </li>
 
@@ -77,9 +99,21 @@ function SubNavbar() {
                   Places
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Kukatpally</a></li>
-                  <li><a className="dropdown-item" href="#">Narsingi</a></li>
-                  <li><a className="dropdown-item" href="#">Kokapet</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Kukatpally
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Narsingi
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Kokapet
+                    </a>
+                  </li>
                 </ul>
               </li>
 
@@ -92,14 +126,33 @@ function SubNavbar() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Plots
+                  Sections
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Commercial</a></li>
-                  <li><a className="dropdown-item" href="#">Residential</a></li>
+                  <li>
+                    <Link
+                      to="plots" // 👈 must match target section ID
+                      smooth={true}
+                      duration={600}
+                      className="dropdown-item"
+                      style={{ cursor: "pointer" }}
+                    >
+                      Plots
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="projects" // 👈 must match target section ID
+                      smooth={true}
+                      duration={600}
+                      className="dropdown-item"
+                      style={{ cursor: "pointer" }}
+                    >
+                      Projects
+                    </Link>
+                  </li>
                 </ul>
               </li>
-
             </ul>
           </div>
         </div>

@@ -116,8 +116,8 @@ export default function HeaderBar() {
 
   const handleCategoryClick = async (category) => {
     try {
-      // const res = await axios.get(`http://localhost:5000/admin/project/${category}`);
-       const res = await axios.get(`https://my-backend-omw2.onrender.com/admin/project/${category}`);
+      const res = await axios.get(`http://localhost:5000/admin/project/${category}`);
+      //  const res = await axios.get(`https://my-backend-omw2.onrender.com/admin/project/${category}`);
       setNavHoverData(res.data);
       setHoverCategory(category);
       setShowHover(true);
@@ -128,18 +128,7 @@ export default function HeaderBar() {
 
   return (
     <>
-      <Box
-        sx={{
-          backgroundImage: `url(${picslogo})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          borderBottomLeftRadius: '30px',
-          borderBottomRightRadius: '30px',
-          overflow: 'hidden',
-          minHeight: '130px',
-          pb: 4
-        }}
-      >
+      <Box>
         <AppBar
           position="static"
           sx={{
@@ -152,8 +141,8 @@ export default function HeaderBar() {
           <Toolbar sx={{ justifyContent: 'space-between' }}>
             {/* Left: Logo + Location */}
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 800, mr: 1, color: '#1976d2' }}>
-                Plots & Properties
+              <Typography variant="h5" sx={{ fontWeight: 700, mr: 1, color: '#black' }}>
+                Telangana landlord & Builder deals
               </Typography>
               <Button sx={{ color: '#333', textTransform: 'none', fontWeight: 500 }}>
                 Hyderabad

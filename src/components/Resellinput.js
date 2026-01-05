@@ -13,9 +13,8 @@ import {
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function PlotsInput() {
+function Resellinput() {
   const [formData, setFormData] = useState({
-    name:'',
     area: '',
     location: '',
     price: '',
@@ -38,7 +37,7 @@ function PlotsInput() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.name ||!formData.area || !formData.location || !formData.price || !formData.type || !image) {
+    if (!formData.area || !formData.location || !formData.price || !formData.type || !image) {
       alert('Please fill all fields and upload an image.');
       return;
     }
@@ -55,12 +54,12 @@ function PlotsInput() {
 }
 
 
-      await axios.post('http://localhost:5000/admin/plot', data);
-      //  await axios.post('https://my-backend-omw2.onrender.com/admin/plot', data);
-      alert('Plot saved successfully!');
+      await axios.post('http://localhost:5000/admin/resell', data);
+      //  await axios.post('https://my-backend-omw2.onrender.com/admin/resell', data);
+      alert('Resell saved successfully!');
       navigate('/dashboard'); // Replace with your route
     } catch (err) {
-      alert('Error uploading plot');
+      alert('Error uploading resell');
       console.error(err);
     }
   };
@@ -90,7 +89,7 @@ function PlotsInput() {
         }}
       >
         <Typography variant="h5" fontWeight="bold" textAlign="center" mb={2}>
-          Add Plot Details
+          Add Resell Details
         </Typography>
 
         {/* Upload Image */}
@@ -116,14 +115,7 @@ function PlotsInput() {
             <FormControlLabel value="residential" control={<Radio />} label="Residential" />
           </RadioGroup>
         </Box>
-           <TextField
-          label="Plot Name"
-          variant="outlined"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          fullWidth
-        />
+
         <TextField
           label="Area"
           variant="outlined"
@@ -166,4 +158,4 @@ function PlotsInput() {
   );
 }
 
-export default PlotsInput;
+export default Resellinput;

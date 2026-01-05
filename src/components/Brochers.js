@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 import {
   Box, Typography, Button, Avatar
 } from '@mui/material';
+
 import HomeIcon from '@mui/icons-material/Home';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DownloadIcon from '@mui/icons-material/Download';
+
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
+
 import PopupForm from './PopupForm';
 
 const Brochers = () => {
@@ -20,8 +24,7 @@ const Brochers = () => {
   const [selectedBrochure, setSelectedBrochure] = useState('');
 
   useEffect(() => {
-    // axios.get('http://localhost:5000/admin/project')
-    axios.get('https://my-backend-omw2.onrender.com/admin/project')
+    axios.get('http://localhost:5000/admin/project')
       .then(response => setProjects(response.data))
       .catch(error => console.error('Error fetching projects:', error));
   }, []);
@@ -37,35 +40,36 @@ const Brochers = () => {
   };
 
   const handleFormSubmit = () => {
-    // Download the brochure after successful form submission
-    // if (selectedBrochure) {
-    //   window.open(`http://localhost:5000${selectedBrochure}`, '_blank');
-    // }
-     if (selectedBrochure) {
-      window.open(`https://my-backend-omw2.onrender.com${selectedBrochure}`, '_blank');
+    if (selectedBrochure) {
+      window.open(`http://localhost:5000${selectedBrochure}`, '_blank');
     }
     handleFormClose();
   };
 
   return (
-    <Box sx={{ width: '90%', margin: 'auto', padding: 4 }}>
+    <Box id="projects" sx={{ width: '90%', mx: 'auto', py: 4 }}>
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={30}
         slidesPerView={3}
-        // navigation
-        loop
         autoplay={{ delay: 2500 }}
         style={{ paddingBottom: '40px' }}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          600: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
       >
         {projects.map((project, index) => (
           <SwiperSlide key={index}>
-            <ProjectCard project={project} onBrochureClick={handleBrochureClick} />
+            <ProjectCard
+              project={project}
+              onBrochureClick={handleBrochureClick}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Form popup with handler */}
       <PopupForm
         open={formOpen}
         onClose={handleFormClose}
@@ -75,38 +79,37 @@ const Brochers = () => {
   );
 };
 
+/* ================= PROJECT CARD ================= */
+
 const ProjectCard = ({ project, onBrochureClick }) => (
   <Box
     sx={{
-      height: "72vh",
       borderRadius: '16px',
-      overflow: 'hidden',
-      backgroundColor: '#fff',
+      // backgroundColor: '#fff',
+      backgroundColor: 'rgba(255, 255, 255, 0.85)', // 85% opacity
       boxShadow: '0 6px 18px rgba(0,0,0,0.1)',
-      fontFamily: 'Arial',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      height: '100%',
     }}
   >
-    {/* Image */}
-    <Box sx={{ display: 'flex', justifyContent: 'center', padding: 2 }}>
+    {/* IMAGE */}
+    <Box sx={{ p: 2 }}>
       <img
-        // src={`http://localhost:5000${project.imageUrl}`}
-         src={`https://my-backend-omw2.onrender.com${project.imageUrl}`}
+        src={`http://localhost:5000${project.imageUrl}`}
         alt={project.name}
         style={{
-          width: "100%",
-          height: "250px",
-          objectFit: "cover",
-          borderRadius: "12px"
+          width: '100%',
+          height: '250px',
+          objectFit: 'cover',
+          borderRadius: '12px',
         }}
       />
     </Box>
 
-    {/* Details */}
-    <Box sx={{ px: 3, pb: 2 }}>
-      <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
+    {/* CONTENT */}
+    <Box sx={{ px: 3, pb: 3 }}>
+      <Typography variant="h6" fontWeight={600} mb={2}>
         {project.name}
       </Typography>
 
@@ -123,13 +126,47 @@ const ProjectCard = ({ project, onBrochureClick }) => (
         <Detail icon={<LocationOnIcon />} label="Location" value={project.location} />
       </Box>
 
+      {/* BUTTONS */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
-        <Button variant="contained" color="error" sx={{ borderRadius: '24px', textTransform: 'none' }}>
+        <Button
+          sx={{
+            borderRadius: '24px',
+            textTransform: 'none',
+            px: 3,
+            py: 1,
+            color: '#fff',
+            fontWeight: 600,
+            background: 'linear-gradient(145deg, #1a1a1a, #000)',
+            boxShadow: `
+              inset 0 1px 1px rgba(255,255,255,0.2),
+              0 6px 12px rgba(0,0,0,0.4)
+            `,
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              background: 'linear-gradient(145deg, #000, #1a1a1a)',
+              boxShadow: `
+                inset 0 1px 1px rgba(255,255,255,0.25),
+                0 8px 16px rgba(0,0,0,0.6)
+              `,
+              transform: 'translateY(-1px)',
+            },
+          }}
+        >
           View Project
         </Button>
+
         <Button
           variant="outlined"
-          sx={{ borderRadius: '24px', textTransform: 'none' }}
+          sx={{
+            borderRadius: '24px',
+            textTransform: 'none',
+            borderColor: '#000',
+            color: '#000',
+            '&:hover': {
+              borderColor: '#000',
+              backgroundColor: '#f5f5f5',
+            },
+          }}
           endIcon={<DownloadIcon />}
           onClick={() => onBrochureClick(project.brochureUrl)}
         >
@@ -140,22 +177,28 @@ const ProjectCard = ({ project, onBrochureClick }) => (
   </Box>
 );
 
+/* ================= DETAIL ROW (BLACK / GREY ICONS) ================= */
+
 const Detail = ({ icon, label, value }) => (
   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
     <Avatar
       sx={{
-        bgcolor: '#e3f2fd',
-        color: '#1976d2',
+        bgcolor: '#f2f2f2',
+        color: '#333',
         width: 28,
         height: 28,
-        fontSize: 16,
       }}
     >
       {icon}
     </Avatar>
+
     <Box>
-      <Typography fontSize="13px" fontWeight="bold">{label}</Typography>
-      <Typography fontSize="13px">{value}</Typography>
+      <Typography fontSize="13px" fontWeight={600} color="#111">
+        {label}
+      </Typography>
+      <Typography fontSize="13px" color="#666">
+        {value}
+      </Typography>
     </Box>
   </Box>
 );

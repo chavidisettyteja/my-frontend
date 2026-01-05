@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import AdminPage from './AdminPage';      // Your existing project form
 import PlotsInput from './PlotsInput';    // Your existing plot form
+import Resellinput from './Resellinput';  // Resell form
 
 function AdminDashboard() {
   const [formType, setFormType] = useState('project');
@@ -23,11 +24,14 @@ function AdminDashboard() {
         >
           <ToggleButton value="project">Projects</ToggleButton>
           <ToggleButton value="plot">Plots</ToggleButton>
+          <ToggleButton value="resell">Resell</ToggleButton>
         </ToggleButtonGroup>
       </div>
 
       {/* Conditional Form Rendering */}
-      {formType === 'project' ? <AdminPage /> : <PlotsInput />}
+      {formType === 'project' && <AdminPage />}
+      {formType === 'plot' && <PlotsInput />}
+      {formType === 'resell' && <Resellinput />}
     </div>
   );
 }
