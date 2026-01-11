@@ -21,7 +21,8 @@ function Bigbrocher() {
   const [selectedBrochure, setSelectedBrochure] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/admin/project')
+    axios.get('http://localhost:4000/admin/project')
+    //  axios.get('https://my-backend-omw2.onrender.com/admin/project')
       .then(res => setProjects(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -33,14 +34,15 @@ function Bigbrocher() {
 
   const handleFormSubmit = () => {
     if (selectedBrochure) {
-      window.open(`http://localhost:5000${selectedBrochure}`, '_blank');
+      window.open(`http://localhost:4000${selectedBrochure}`, '_blank');
+      //  window.open(`https://my-backend-omw2.onrender.com/${selectedBrochure}`, '_blank');
     }
     setFormOpen(false);
     setSelectedBrochure('');
   };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: '1750px', mx: 'auto', p: 4 }}>
+    <Box id="bigbrocher" sx={{ width: '100%', maxWidth: '1750px', mx: 'auto', p: 4 }}>
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={30}
@@ -83,7 +85,8 @@ const ProjectCard = ({ project, onBrochureClick }) => (
     }}
   >
     <img
-      src={`http://localhost:5000${project.imageUrl}`}
+      src={`http://localhost:4000${project.imageUrl}`}
+            // src={`https://my-backend-omw2.onrender.com${project.imageUrl}`}
       alt="Project"
       style={{
         width: '100%',
@@ -129,8 +132,10 @@ const ProjectCard = ({ project, onBrochureClick }) => (
       <Box sx={{ display: 'flex', gap: 2 }}>
         {/* BLACK GLOSSY BUTTON */}
         <Button
+          component="a"
+          href="tel:+919876543210"   // 🔥 CHANGE TO YOUR NUMBER
           sx={{
-            borderRadius: '30px',
+            borderRadius: '24px',
             textTransform: 'none',
             px: 4,
             py: 1,
@@ -139,15 +144,20 @@ const ProjectCard = ({ project, onBrochureClick }) => (
             background: 'linear-gradient(145deg, #1a1a1a, #000)',
             boxShadow: `
               inset 0 1px 1px rgba(255,255,255,0.2),
-              0 8px 18px rgba(0,0,0,0.6)
+              0 6px 12px rgba(0,0,0,0.4)
             `,
+            transition: 'all 0.3s ease',
             '&:hover': {
               background: 'linear-gradient(145deg, #000, #1a1a1a)',
+              boxShadow: `
+                inset 0 1px 1px rgba(255,255,255,0.25),
+                0 8px 16px rgba(0,0,0,0.6)
+              `,
               transform: 'translateY(-1px)',
             },
           }}
         >
-          View Project
+           Contact Now
         </Button>
 
         {/* OUTLINED BLACK BUTTON */}

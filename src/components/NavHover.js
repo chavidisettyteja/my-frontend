@@ -6,8 +6,8 @@ export default function NavHover({ category }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/plots?category=${category}`)
-    //  axios.get(`https://my-backend-omw2.onrender.com/api/plots?category=${category}`)
+    // axios.get(`http://localhost:5000/api/plots?category=${category}`)
+     axios.get(`https://my-backend-omw2.onrender.com/api/plots?category=${category}`)
       .then(res => setData(res.data))
       .catch(err => console.error(err));
   }, [category]);

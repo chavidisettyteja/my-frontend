@@ -12,6 +12,7 @@ import SubNavbar from './components/SubNavbar';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import AdminDashboard from './components/AdminDashboard';
+import ProjectDetails from "./components/ProjectDetails";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
   <Routes>
   <Route path='/' element={<MainHome />} />
   <Route path="/adminPage" element={<AdminDashboard />} />
-
+    <Route path="/projects/:id" element={<ProjectDetails />} />
   <Route path='/admin' element={<Admin />} />
   {/* <Route path='/adminpage' element={<AdminPage />} /> */}
 </Routes>

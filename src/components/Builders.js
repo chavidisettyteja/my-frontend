@@ -6,7 +6,7 @@ function Builders() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/admin/project')
+      .get('http://localhost:4000/admin/project')
       //  .get('https://my-backend-omw2.onrender.com/admin/project')
       .then((response) => setProjects(response.data))
       .catch((error) => console.error('Error fetching projects:', error));
@@ -45,7 +45,7 @@ function Builders() {
                 key={index}
               >
                 <img
-                  src={`http://localhost:5000${project.imageUrl}`}
+                  src={`http://localhost:4000${project.imageUrl}`}
                   //  src={`https://my-backend-omw2.onrender.com${project.imageUrl}`}
                   className="d-block w-100"
                   alt={`Project ${index}`}

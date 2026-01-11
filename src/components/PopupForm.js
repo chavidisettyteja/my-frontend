@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogActions,
   TextField,
   Button,
-  Box
-} from '@mui/material';
+  Box,
+  Typography,
+  IconButton
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 const PopupForm = ({ open, onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: ''
+    name: "",
+    email: "",
+    phone: ""
   });
 
   const handleChange = (e) => {
@@ -24,65 +28,135 @@ const PopupForm = ({ open, onClose, onSubmit }) => {
     e.preventDefault();
 
     const formURL =
-      'https://docs.google.com/forms/u/0/d/e/1FAIpQLScXWoZGqpvbuFirhLuhFRU6KqiCzOb4pzTSkwmAFyhBopMwtw/formResponse';
+      "https://docs.google.com/forms/u/0/d/e/1FAIpQLScXWoZGqpvbuFirhLuhFRU6KqiCzOb4pzTSkwmAFyhBopMwtw/formResponse";
 
     const formBody = new URLSearchParams({
-      'entry.1977728637': formData.name,
-      'entry.1093727647': formData.phone,
-      // If you have email entry in your form, add it:
-      // 'entry.xxxxxx': formData.email
+      "entry.1977728637": formData.name,
+      "entry.1093727647": formData.phone
     });
 
     try {
       await fetch(formURL, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: "POST",
+        mode: "no-cors",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          "Content-Type": "application/x-www-form-urlencoded"
         },
         body: formBody.toString()
       });
 
-      setFormData({ name: '', email: '', phone: '' });
-      onSubmit();  // 👈 triggers brochure download from parent
+      setFormData({ name: "", email: "", phone: "" });
+      onSubmit();
     } catch (err) {
-      console.error('Submission likely successful (no-cors):', err);
-      onSubmit();  // 👈 still trigger download
+      console.error("Submission likely successful:", err);
+      onSubmit();
     }
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Get Brochure</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="xs"
+      fullWidth
+      PaperProps={{
+        sx: {
+          borderRadius: 4,
+          background:
+            "linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8))",
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 20px 50px rgba(0,0,0,0.3)"
+        }
+      }}
+    >
+      {/* ================= HEADER ================= */}
+      <Box
+        sx={{
+          background: "linear-gradient(135deg, #f2c185, #e8a84d)",
+          p: 2.5,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}
+      >
+        <Typography fontWeight={700} fontSize={18}>
+          Get Project Brochure
+        </Typography>
+        <IconButton onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
+
+      {/* ================= CONTENT ================= */}
       <DialogContent>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+        <Typography
+          sx={{ mb: 3, mt: 1, color: "#444", fontSize: 14 }}
+        >
+          Fill in your details to instantly download the brochure.
+        </Typography>
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}
+        >
           <TextField
-            label="Name"
+            placeholder="Your Name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            fullWidth
+            required
+            InputProps={{
+              startAdornment: <PersonIcon sx={{ mr: 1, color: "#999" }} />
+            }}
           />
+
           <TextField
-            label="Email"
+            placeholder="Email Address"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            fullWidth
+            InputProps={{
+              startAdornment: <EmailIcon sx={{ mr: 1, color: "#999" }} />
+            }}
           />
+
           <TextField
-            label="Phone Number"
+            placeholder="Phone Number"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            fullWidth
+            required
+            InputProps={{
+              startAdornment: <PhoneIcon sx={{ mr: 1, color: "#999" }} />
+            }}
           />
+
+          {/* ================= CTA ================= */}
+          <Button
+            type="submit"
+            size="large"
+            sx={{
+              mt: 2,
+              py: 1.4,
+              borderRadius: 3,
+              fontWeight: 600,
+              fontSize: 15,
+              background:
+                "linear-gradient(135deg, #111, #333)",
+              color: "#fff",
+              transition: "0.3s",
+              "&:hover": {
+                background:
+                  "linear-gradient(135deg, #000, #222)",
+                transform: "translateY(-2px)"
+              }
+            }}
+          >
+            📄 Submit & Download Brochure
+          </Button>
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="error">Cancel</Button>
-        <Button onClick={handleSubmit} variant="contained">Submit & Download</Button>
-      </DialogActions>
     </Dialog>
   );
 };

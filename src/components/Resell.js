@@ -20,7 +20,9 @@ function Resell() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/admin/resell')
+      .get('http://localhost:4000/admin/resell')
+            // .get('https://my-backend-omw2.onrender.com/admin/resell')
+
       .then(res => setResellList(res.data))
       .catch(err => console.error('❌ Error fetching resell:', err));
   }, []);
@@ -52,7 +54,7 @@ function Resell() {
 /* ================= RESELL CARD ================= */
 
 const ResellCard = ({ resell }) => (
-  <Box
+  <Box id="resell"
     sx={{
       borderRadius: '16px',
       // backgroundColor: '#fff',
@@ -66,7 +68,9 @@ const ResellCard = ({ resell }) => (
     {/* IMAGE */}
     <Box sx={{ p: 2 }}>
       <img
-        src={`http://localhost:5000${resell.imageUrl}`}
+        src={`http://localhost:4000${resell.imageUrl}`}
+                // src={`https://my-backend-omw2.onrender.com${resell.imageUrl}`}
+
         alt="Resell"
         style={{
           width: '100%',
@@ -101,31 +105,34 @@ const ResellCard = ({ resell }) => (
       {/* BUTTON */}
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
         <Button
-          sx={{
-            borderRadius: '24px',
-            textTransform: 'none',
-            px: 4,
-            py: 1,
-            color: '#fff',
-            fontWeight: 600,
-            background: 'linear-gradient(145deg, #1a1a1a, #000)',
-            boxShadow: `
-              inset 0 1px 1px rgba(255,255,255,0.2),
-              0 6px 12px rgba(0,0,0,0.4)
-            `,
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              background: 'linear-gradient(145deg, #000, #1a1a1a)',
-              boxShadow: `
-                inset 0 1px 1px rgba(255,255,255,0.25),
-                0 8px 16px rgba(0,0,0,0.6)
-              `,
-              transform: 'translateY(-1px)',
-            },
-          }}
-        >
-          Contact Now
-        </Button>
+  component="a"
+  href="tel:+919876543210"   // 🔥 CHANGE TO YOUR NUMBER
+  sx={{
+    borderRadius: '24px',
+    textTransform: 'none',
+    px: 4,
+    py: 1,
+    color: '#fff',
+    fontWeight: 600,
+    background: 'linear-gradient(145deg, #1a1a1a, #000)',
+    boxShadow: `
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      0 6px 12px rgba(0,0,0,0.4)
+    `,
+    transition: 'all 0.3s ease',
+    '&:hover': {
+      background: 'linear-gradient(145deg, #000, #1a1a1a)',
+      boxShadow: `
+        inset 0 1px 1px rgba(255,255,255,0.25),
+        0 8px 16px rgba(0,0,0,0.6)
+      `,
+      transform: 'translateY(-1px)',
+    },
+  }}
+>
+   Contact Now
+</Button>
+
       </Box>
     </Box>
   </Box>

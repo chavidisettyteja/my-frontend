@@ -20,20 +20,18 @@ function Resellinput() {
     price: '',
     type: '',
   });
+
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
-    }
+    if (file) setPreviewUrl(URL.createObjectURL(file));
   };
 
   const handleSubmit = async () => {
@@ -45,19 +43,11 @@ function Resellinput() {
     try {
       const data = new FormData();
       data.append('image', image);
-      for (let key in formData) {
-        data.append(key, formData[key]);
-      }
-      
-      for (let pair of data.entries()) {
-  console.log(pair[0] + ':', pair[1]);
-}
+      Object.entries(formData).forEach(([k, v]) => data.append(k, v));
 
-
-      await axios.post('http://localhost:5000/admin/resell', data);
-      //  await axios.post('https://my-backend-omw2.onrender.com/admin/resell', data);
+      await axios.post('http://localhost:4000/admin/resell', data);
       alert('Resell saved successfully!');
-      navigate('/dashboard'); // Replace with your route
+      navigate('/');
     } catch (err) {
       alert('Error uploading resell');
       console.error(err);
@@ -67,89 +57,129 @@ function Resellinput() {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
-        backgroundColor: '#f8d2dc',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
         px: 2,
+        py: 4,
       }}
     >
+      {/* ================= FORM CARD ================= */}
       <Box
         sx={{
-          backgroundColor: 'white',
-          borderRadius: 4,
-          boxShadow: 3,
-          p: 4,
           width: '100%',
-          maxWidth: 500,
+          maxWidth: 900,
+          p: 4,
+          borderRadius: 4,
+          background: 'rgba(255,255,255,0.12)',
+          backdropFilter: 'blur(12px)',
+          boxShadow: '0 30px 80px rgba(0,0,0,0.35)',
           display: 'flex',
           flexDirection: 'column',
           gap: 3,
+          color: '#fff',
         }}
       >
-        <Typography variant="h5" fontWeight="bold" textAlign="center" mb={2}>
-          Add Resell Details
+        <Typography variant="h4" fontWeight={800} textAlign="center">
+          Add Resell Property
         </Typography>
 
-        {/* Upload Image */}
+        <Typography textAlign="center" sx={{ opacity: 0.85, mb: 2 }}>
+          Enter resale property details
+        </Typography>
+
+        {/* IMAGE UPLOAD */}
         <Box>
-          <Typography>Upload Image</Typography>
-          <Input type="file" onChange={handleImageChange} />
+          <Typography mb={1}>Upload Image</Typography>
+          <Input type="file" onChange={handleImageChange} sx={{ color: '#fff' }} />
           {previewUrl && (
-            <Box mt={1}>
+            <Box mt={2}>
               <img
                 src={previewUrl}
                 alt="Preview"
-                style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
+                style={{
+                  width: '100%',
+                  height: '260px',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                }}
               />
             </Box>
           )}
         </Box>
 
-        {/* Radio for Type */}
+        {/* TYPE */}
         <Box>
-          <FormLabel component="legend">Type</FormLabel>
+          <FormLabel sx={{ color: '#fff' }}>Type</FormLabel>
           <RadioGroup row name="type" value={formData.type} onChange={handleChange}>
             <FormControlLabel value="commercial" control={<Radio />} label="Commercial" />
             <FormControlLabel value="residential" control={<Radio />} label="Residential" />
           </RadioGroup>
         </Box>
 
-        <TextField
-          label="Area"
-          variant="outlined"
-          name="area"
-          value={formData.area}
-          onChange={handleChange}
-          fullWidth
-        />
-        <TextField
-          label="Location"
-          variant="outlined"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          fullWidth
-        />
-        <TextField
-          label="Price"
-          variant="outlined"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          fullWidth
-        />
+        {/* INPUT GRID */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+            gap: 2,
+          }}
+        >
+          <TextField
+            label="Area"
+            name="area"
+            value={formData.area}
+            onChange={handleChange}
+            variant="filled"
+            InputProps={{ disableUnderline: true }}
+            sx={{ background: 'rgba(255,255,255,0.95)', borderRadius: 1 }}
+          />
 
-        {/* Buttons */}
-        <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ borderRadius: '30px' }}>
-          Submit
+          <TextField
+            label="Location"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            variant="filled"
+            InputProps={{ disableUnderline: true }}
+            sx={{ background: 'rgba(255,255,255,0.95)', borderRadius: 1 }}
+          />
+
+          <TextField
+            label="Price"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            variant="filled"
+            InputProps={{ disableUnderline: true }}
+            sx={{ background: 'rgba(255,255,255,0.95)', borderRadius: 1 }}
+          />
+        </Box>
+
+        {/* ACTION BUTTONS */}
+        <Button
+          onClick={handleSubmit}
+          sx={{
+            mt: 3,
+            py: 1.6,
+            borderRadius: '30px',
+            fontWeight: 700,
+            fontSize: '16px',
+            background: 'linear-gradient(135deg, #f2c185, #e8a84d)',
+            color: '#111',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
+          }}
+        >
+          Submit Resell
         </Button>
+
         <Button
           variant="outlined"
-          color="error"
           onClick={() => navigate('/')}
-          sx={{ borderRadius: '30px' }}
+          sx={{
+            borderRadius: '30px',
+            color: '#fff',
+            borderColor: 'rgba(255,255,255,0.5)',
+          }}
         >
           Logout
         </Button>

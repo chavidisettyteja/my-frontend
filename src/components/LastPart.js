@@ -14,7 +14,7 @@ import {
 
 function LastPart() {
   return (
-    <Box
+    <Box id="about"
       sx={{
         background: 'linear-gradient(145deg, #0b0b0b, #000)',
         color: '#fff',
