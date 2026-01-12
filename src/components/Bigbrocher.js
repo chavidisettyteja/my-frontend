@@ -21,8 +21,8 @@ function Bigbrocher() {
   const [selectedBrochure, setSelectedBrochure] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:4000/admin/project')
-    //  axios.get('https://my-backend-omw2.onrender.com/admin/project')
+    // axios.get('http://localhost:4000/admin/project')
+     axios.get('https://my-backend-omw2.onrender.com/admin/project')
       .then(res => setProjects(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -34,8 +34,8 @@ function Bigbrocher() {
 
   const handleFormSubmit = () => {
     if (selectedBrochure) {
-      window.open(`http://localhost:4000${selectedBrochure}`, '_blank');
-      //  window.open(`https://my-backend-omw2.onrender.com/${selectedBrochure}`, '_blank');
+      // window.open(`http://localhost:4000${selectedBrochure}`, '_blank');
+       window.open(`https://my-backend-omw2.onrender.com${selectedBrochure}`, '_blank');
     }
     setFormOpen(false);
     setSelectedBrochure('');
@@ -85,8 +85,8 @@ const ProjectCard = ({ project, onBrochureClick }) => (
     }}
   >
     <img
-      src={`http://localhost:4000${project.imageUrl}`}
-            // src={`https://my-backend-omw2.onrender.com${project.imageUrl}`}
+      // src={`http://localhost:4000${project.imageUrl}`}
+            src={`https://my-backend-omw2.onrender.com${project.imageUrl}`}
       alt="Project"
       style={{
         width: '100%',
@@ -133,7 +133,7 @@ const ProjectCard = ({ project, onBrochureClick }) => (
         {/* BLACK GLOSSY BUTTON */}
         <Button
           component="a"
-          href="tel:+919876543210"   // 🔥 CHANGE TO YOUR NUMBER
+          href="tel:+918897334187"   // 🔥 CHANGE TO YOUR NUMBER
           sx={{
             borderRadius: '24px',
             textTransform: 'none',

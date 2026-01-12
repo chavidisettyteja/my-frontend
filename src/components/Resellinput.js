@@ -45,7 +45,9 @@ function Resellinput() {
       data.append('image', image);
       Object.entries(formData).forEach(([k, v]) => data.append(k, v));
 
-      await axios.post('http://localhost:4000/admin/resell', data);
+      // await axios.post('http://localhost:4000/admin/resell', data);
+            await axios.post('https://my-backend-omw2.onrender.com/admin/resell', data);
+
       alert('Resell saved successfully!');
       navigate('/');
     } catch (err) {

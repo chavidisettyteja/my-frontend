@@ -107,7 +107,7 @@ function LastPart() {
         display="block"
         sx={{ mt: 6, color: '#777' }}
       >
-        © {new Date().getFullYear()} Havenly Homes. All rights reserved.
+        © {new Date().getFullYear()} Telangana landlords and Builder deals. All rights reserved.
         <br />
         Designed for premium real estate experiences.
       </Typography>

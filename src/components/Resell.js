@@ -20,8 +20,8 @@ function Resell() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/admin/resell')
-            // .get('https://my-backend-omw2.onrender.com/admin/resell')
+      // .get('http://localhost:4000/admin/resell')
+            .get('https://my-backend-omw2.onrender.com/admin/resell')
 
       .then(res => setResellList(res.data))
       .catch(err => console.error('❌ Error fetching resell:', err));
@@ -68,8 +68,8 @@ const ResellCard = ({ resell }) => (
     {/* IMAGE */}
     <Box sx={{ p: 2 }}>
       <img
-        src={`http://localhost:4000${resell.imageUrl}`}
-                // src={`https://my-backend-omw2.onrender.com${resell.imageUrl}`}
+        // src={`http://localhost:4000${resell.imageUrl}`}
+                src={`https://my-backend-omw2.onrender.com${resell.imageUrl}`}
 
         alt="Resell"
         style={{
@@ -106,7 +106,7 @@ const ResellCard = ({ resell }) => (
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
         <Button
   component="a"
-  href="tel:+919876543210"   // 🔥 CHANGE TO YOUR NUMBER
+  href="tel:+918897334187"   // 🔥 CHANGE TO YOUR NUMBER
   sx={{
     borderRadius: '24px',
     textTransform: 'none',

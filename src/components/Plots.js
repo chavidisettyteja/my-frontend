@@ -24,8 +24,8 @@ function Plots() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/admin/plot')
-            // .get('https://my-backend-omw2.onrender.com/admin/plot')
+      // .get('http://localhost:4000/admin/plot')
+            .get('https://my-backend-omw2.onrender.com/admin/plot')
       .then(res => setPlots(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -71,8 +71,8 @@ const PlotCard = ({ plot }) => (
     {/* IMAGE */}
     <Box sx={{ p: 2 }}>
       <img
-        src={`http://localhost:4000${plot.imageUrl}`}
-                // src={`https://my-backend-omw2.onrender.com${plot.imageUrl}`}
+        // src={`http://localhost:4000${plot.imageUrl}`}
+                src={`https://my-backend-omw2.onrender.com${plot.imageUrl}`}
         alt="Plot"
         style={{
           width: '100%',
@@ -106,7 +106,7 @@ const PlotCard = ({ plot }) => (
       <Box sx={{ mt: 3 }}>
         <Button
   component="a"
-  href="tel:+919876543210"   // 📞 CHANGE TO YOUR NUMBER
+  href="tel:+9198897334187"   // 📞 CHANGE TO YOUR NUMBER
   fullWidth
   sx={{
     borderRadius: '24px',

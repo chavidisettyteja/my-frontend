@@ -46,7 +46,9 @@ function PlotsInput() {
       data.append('image', image);
       Object.entries(formData).forEach(([k, v]) => data.append(k, v));
 
-      await axios.post('http://localhost:4000/admin/plot', data);
+      // await axios.post('http://localhost:4000/admin/plot', data);
+            await axios.post('https://my-backend-omw2.onrender.com/admin/plot', data);
+
       alert('Plot saved successfully!');
       navigate('/');
     } catch (err) {

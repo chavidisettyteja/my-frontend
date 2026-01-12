@@ -71,7 +71,9 @@ function AdminPage() {
       if (bgimage) data.append("bgimage", bgimage);
       if (brochure) data.append("brochure", brochure);
 
-      await axios.post("http://localhost:4000/admin/project", data);
+      // await axios.post("http://localhost:4000/admin/project", data);
+            await axios.post("https://my-backend-omw2.onrender.com/admin/project", data);
+
       alert("Project saved successfully!");
       navigate("/");
     } catch (err) {

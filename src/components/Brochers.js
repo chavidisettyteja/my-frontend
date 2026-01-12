@@ -31,8 +31,8 @@ const Brochers = () => {
 
   useEffect(() => {
     axios
-      // .get("https://my-backend-omw2.onrender.com/admin/project")
-      .get("http://localhost:4000/admin/project")
+      .get("https://my-backend-omw2.onrender.com/admin/project")
+      // .get("http://localhost:4000/admin/project")
       .then((response) => setProjects(response.data))
       .catch((error) =>
         console.error("Error fetching projects:", error)
@@ -51,8 +51,12 @@ const Brochers = () => {
 
   const handleFormSubmit = () => {
     if (selectedBrochure) {
-      window.open(
-        `http://localhost:4000${selectedBrochure}`,
+      // window.open(
+      //   `http://localhost:4000${selectedBrochure}`,
+      //   "_blank"
+      // );
+       window.open(
+        `https://my-backend-omw2.onrender.com${selectedBrochure}`,
         "_blank"
       );
     }
@@ -111,7 +115,9 @@ const ProjectCard = ({ project, onBrochureClick, onViewProject }) => (
     {/* IMAGE */}
     <Box sx={{ p: 2 }}>
       <img
-        src={`http://localhost:4000${project.imageUrl}`}
+        // src={`http://localhost:4000${project.imageUrl}`}
+                src={`https://my-backend-omw2.onrender.com${project.imageUrl}`}
+
         alt={project.name}
         style={{
           width: "100%",

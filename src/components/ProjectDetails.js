@@ -4,7 +4,9 @@ import axios from "axios";
 import Amenities from "../components/Amenities";
 import LastPart from "./LastPart";
 
-const API_BASE = "http://localhost:4000";
+// const API_BASE = "http://localhost:4000";
+const API_BASE = "https://my-backend-omw2.onrender.com";
+
 
 const formatPrice = (value) => {
   if (!value) return "";
